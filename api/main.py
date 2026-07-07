@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from database import SessionLocal, Usuario
+from app.repositories.user_repository import get_user_by_id, save_user
 
 app = FastAPI()
 db = SessionLocal()
@@ -27,22 +28,7 @@ def receive_message(data: Message):
 
         nome = data.message[11:].strip()
 
-        usuario = db.get(Usuario, user_id)
-
-        if usuario is None:
-
-            usuario = Usuario(
-                user_id=user_id,
-                nome=nome
-            )
-
-            db.add(usuario)
-
-        else:
-
-            usuario.nome = nome
-
-        db.commit()
+        save_user(user_id, nome)
 
         return {
             "response": f"Prazer, {nome}! Vou me lembrar do seu nome."
@@ -108,7 +94,7 @@ def receive_message(data: Message):
     
     if user_message == "qual é meu nome?":
 
-        usuario = db.get(Usuario, user_id)
+        usuario = get_user_by_id(user_id)
 
         if usuario:
 
