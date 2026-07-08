@@ -21,12 +21,7 @@ class MenuCommand(BaseCommand):
 
             conversation_state_service.set(user_id, "prices")
 
-            return (
-                "💰 Tabela de preços\n\n"
-                "• Plano Básico\n"
-                "• Plano Premium\n"
-                "• Plano Enterprise"
-            )
+            return "Consultando tabela de preços..."
 
         if option == "2":
 
@@ -38,4 +33,4 @@ class MenuCommand(BaseCommand):
 
             conversation_state_service.set(user_id, "schedule")
 
-            return "Informe a data desejada para o agendamento."
+            return "Qual data você deseja agendar?"
