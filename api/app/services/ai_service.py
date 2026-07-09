@@ -1,33 +1,65 @@
-from openai import OpenAI
+from google import genai
 
 from app.config.settings import settings
-
-
-client = OpenAI(
-    api_key=settings.OPENROUTER_API_KEY,
-    base_url="https://openrouter.ai/api/v1"
+from app.repositories.message_repository import (
+    save_message,
+    get_last_messages
 )
+from app.services.knowledge_service import get_company_context
 
 
-def ask_ai(user_message: str) -> str:
+client = genai.Client(api_key=settings.GEMINI_API_KEY)
 
-    response = client.chat.completions.create(
 
-        model="qwen/qwen3-30b-a3b",
+def ask_ai(user_id: str, user_message: str) -> str:
 
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "Você é um assistente virtual profissional, educado e objetivo. "
-                    "Responda sempre em português do Brasil."
-                )
-            },
-            {
-                "role": "user",
-                "content": user_message
-            }
-        ]
+    print("4 - entrou na IA")
+    history = reversed(get_last_messages(user_id))
+
+    company_context = get_company_context()
+
+    prompt = f"""
+    Você é Wayne Assistant.
+
+    Você trabalha para a empresa abaixo.
+
+    Informações da empresa:
+
+    {company_context}
+
+    Nunca invente informações.
+
+    Caso algo não esteja descrito acima, diga que um atendente responderá em breve.
+
+    Sempre responda em português do Brasil.
+    """
+
+    contents = [prompt]
+
+    for message in history:
+        contents.append(
+        f"{message.role}: {message.content}"
     )
 
-    return response.choices[0].message.content
+    contents.append(f"Usuário: {user_message}")
+
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents="\n".join(contents)
+    )
+
+    answer = response.text
+
+    save_message(
+        user_id,
+        "Usuário",
+        user_message
+)
+
+    save_message(
+        user_id,
+        "Assistente",
+        answer
+)
+
+    return answer

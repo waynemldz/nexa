@@ -9,8 +9,9 @@ Base = declarative_base()
 
 SessionLocal = sessionmaker(bind=engine)
 
-# Importa os modelos após criar o Base
+# IMPORTAR OS MODELOS SOMENTE DEPOIS DE CRIAR O BASE
 from app.models.user import Usuario
 from app.models.conversation_state import ConversationState
+from app.models.message import Message
 
 Base.metadata.create_all(bind=engine)
