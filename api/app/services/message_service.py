@@ -33,6 +33,21 @@ def process_message(user_id: str, message: str):
             "Sua solicitação continua em atendimento. ✅\n"
             "Nossa equipe responderá assim que possível."
         )
+    
+    acknowledgement_messages = {
+        "ok",
+        "okay",
+        "ta bom",
+        "tá bom",
+        "tudo bem",
+        "beleza",
+        "entendi",
+        "certo",
+        "blz",
+        "valeu",
+        "obrigado",
+        "obrigada",
+    }
 
     negative_responses = {
         "nao",
@@ -49,7 +64,11 @@ def process_message(user_id: str, message: str):
     }
 
     if current_state == "awaiting_more":
-        if normalized_message in negative_responses:
+
+        if (
+            normalized_message in negative_responses
+            or normalized_message in acknowledgement_messages
+        ):
             conversation_state_service.clear(user_id)
 
             return (
@@ -57,7 +76,7 @@ def process_message(user_id: str, message: str):
                 "Conversa encerrada. Quando precisar, é só enviar uma nova mensagem."
             )
 
-        conversation_state_service.set(user_id, "menu")
+    conversation_state_service.set(user_id, "menu")
 
     if normalized_message in {
         "oi",
@@ -71,20 +90,7 @@ def process_message(user_id: str, message: str):
         conversation_state_service.set(user_id, "menu")
         return get_main_menu()
 
-    acknowledgement_messages = {
-        "ok",
-        "okay",
-        "ta bom",
-        "tá bom",
-        "tudo bem",
-        "beleza",
-        "entendi",
-        "certo",
-        "blz",
-        "valeu",
-        "obrigado",
-        "obrigada",
-    }
+    
 
     if normalized_message in acknowledgement_messages:
         conversation_state_service.set(user_id, "awaiting_more")
