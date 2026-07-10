@@ -49,6 +49,7 @@ class MenuCommand(BaseCommand):
         "3",
         "agendar",
         "agendamento",
+        "agendar conversa",
         "quero agendar",
         "marcar reuniao",
         "marcar conversa",

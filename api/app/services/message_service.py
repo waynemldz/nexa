@@ -1,6 +1,11 @@
+import logging
+
 from app.commands.command_dispatcher import CommandDispatcher
 from app.services.ai_service import ask_ai
 from app.services.conversation_state_service import conversation_state_service
+from app.services.ticket_service import ticket_service
+
+logger = logging.getLogger(__name__)
 
 dispatcher = CommandDispatcher()
 
@@ -104,9 +109,26 @@ def process_message(user_id: str, message: str):
         conversation_state_service.set(user_id, "menu")
         return get_main_menu()
 
-    response = dispatcher.dispatch(user_id, message)
+    try:
+        response = dispatcher.dispatch(user_id, message)
 
-    if response:
-        return response
+        if response:
+            return response
 
-    return ask_ai(user_id, message)
+        return ask_ai(user_id, message)
+
+    except Exception:
+        logger.exception(
+            "Erro ao processar mensagem do usuário %s",
+            user_id
+        )
+
+        ticket = ticket_service.create(user_id)
+        conversation_state_service.set(user_id, "human")
+
+        return (
+            "⚠️ No momento não consegui processar sua solicitação.\n\n"
+            "Encaminhei sua conversa para um atendente, "
+            "que continuará o atendimento assim que possível.\n\n"
+            f"Protocolo: #{ticket.id}"
+        )

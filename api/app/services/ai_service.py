@@ -62,3 +62,28 @@ def ask_ai(user_id: str, user_message: str) -> str:
 )
 
     return answer
+
+    prompt = f"""
+    Extraia somente a data e o horário da mensagem abaixo.
+
+    Mensagem:
+    {message}
+
+    Regras:
+    - Remova expressões como "podemos agendar", "quero marcar" e "teria horário".
+    - Preserve apenas a data e o horário informados.
+    - Não adicione explicações.
+    - Não invente informações.
+    - Responda em português do Brasil.
+
+    Exemplo:
+    Entrada: Podemos agendar sexta-feira às 8?
+    Saída: sexta-feira às 8h
+    """
+
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt
+    )
+
+    return response.text.strip()

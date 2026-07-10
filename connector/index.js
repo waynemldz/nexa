@@ -39,11 +39,14 @@ client.on('message', async (message) => {
             response.data.response
         );
     } catch (error) {
-        console.log('Erro: ', error.message);
+        console.error(
+            'Erro ao processar mensagem:',
+            error.response?.data || error.stack || error.message
+        );
 
         await message.reply(
-            'Erro ao processar mensagem.'
-        );
+            '⚠️ Estamos com uma instabilidade momentânea. Por favor, tente novamente em alguns instantes.'
+);
     }
 });
 
