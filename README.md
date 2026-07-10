@@ -149,7 +149,7 @@ Unknown questions are gracefully redirected to human support.
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-user/nexa.git
+git clone https://github.com/waynemldz/nexa.git
 ```
 
 Navigate to the project:
