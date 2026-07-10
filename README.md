@@ -26,7 +26,7 @@ AI-powered WhatsApp virtual assistant built with **FastAPI**, **Google Gemini** 
 ## 📷 API Documentation
 
 <p align="center">
-    <img src="assets/swagger.png" width="900">
+    <img src="assets/demo.gif" alt="Nexa demo" width="900">
 </p>
 
 ---
