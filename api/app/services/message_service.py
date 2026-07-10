@@ -7,12 +7,12 @@ dispatcher = CommandDispatcher()
 
 def get_main_menu() -> str:
     return (
-        "Olá! Eu sou a Nexa, assistente virtual da Wayne Tech.\n\n"
-        "Como posso ajudar?\n"
-        "1 - Conhecer serviços e preços\n"
-        "2 - Solicitar suporte\n"
-        "3 - Agendar uma conversa\n\n"
-        'Digite "menu" para voltar ao início.'
+        "👋 Olá! Eu sou a *Nexa*, assistente virtual da Wayne Tech.\n\n"
+        "Como posso ajudar você hoje?\n\n"
+        "1️⃣ Conhecer serviços e preços\n"
+        "2️⃣ Solicitar suporte\n"
+        "3️⃣ Agendar uma conversa\n\n"
+        '💡 A qualquer momento, digite *menu* para voltar ao início.'
     )
 
 

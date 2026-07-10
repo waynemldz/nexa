@@ -71,12 +71,15 @@ class MenuCommand(BaseCommand):
             conversation_state_service.set(user_id, "menu")
 
             return (
-                "💰 Tabela de preços\n\n"
-                "• Plano Básico - R$ 49,90\n"
-                "• Plano Premium - R$ 99,90\n"
-                "• Plano Enterprise - Sob consulta\n\n"
-                "Você também pode fazer perguntas sobre nossos serviços.\n"
-                'Digite "menu" para voltar ao menu principal.'
+                "💎 *Nossos planos*\n\n"
+                "🥉 *Plano Básico* — R$ 49,90\n"
+                "Ideal para pequenas empresas.\n\n"
+                "🥈 *Plano Premium* — R$ 99,90\n"
+                "Mais recursos e suporte prioritário.\n\n"
+                "💎 *Plano Enterprise*\n"
+                "Valor sob consulta.\n\n"
+                "❓ Ficou com alguma dúvida sobre os planos ou serviços?\n"
+                "Estou à disposição para ajudar."
             )
 
         if normalized_message in self.support_triggers:
