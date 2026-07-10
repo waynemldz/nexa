@@ -4,6 +4,7 @@ from app.commands.menu_command import MenuCommand
 from app.commands.support_command import SupportCommand
 from app.commands.price_command import PriceCommand
 from app.commands.schedule_command import ScheduleCommand
+from app.commands.human_command import HumanCommand
 
 class CommandDispatcher:
 
@@ -16,6 +17,7 @@ class CommandDispatcher:
             SupportCommand(),
             PriceCommand(),
             ScheduleCommand(),
+            HumanCommand(),
         ]
 
     def dispatch(self, user_id: str, message: str):
