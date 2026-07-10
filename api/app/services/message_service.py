@@ -76,7 +76,7 @@ def process_message(user_id: str, message: str):
                 "Conversa encerrada. Quando precisar, é só enviar uma nova mensagem."
             )
 
-    conversation_state_service.set(user_id, "menu")
+        conversation_state_service.set(user_id, "menu")
 
     if normalized_message in {
         "oi",
