@@ -1,7 +1,5 @@
 # 🤖 Nexa
 
-# 🤖 Nexa
-
 <div align="center">
 
 AI-powered WhatsApp virtual assistant built with **FastAPI**, **Google Gemini** and **WhatsApp Web**.
