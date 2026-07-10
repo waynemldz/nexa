@@ -1,11 +1,42 @@
 # 🤖 Nexa
 
-> AI-powered WhatsApp virtual assistant built with FastAPI, Python and Google Gemini.
+# 🤖 Nexa
 
-Nexa is a portfolio project that simulates a real customer service assistant for WhatsApp. It combines deterministic conversation flows with generative AI to provide support, answer company-related questions and manage customer interactions.
+<div align="center">
+
+AI-powered WhatsApp virtual assistant built with **FastAPI**, **Google Gemini** and **WhatsApp Web**.
+
+![Python](https://img.shields.io/badge/Python-3.14-blue?style=for-the-badge&logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-red?style=for-the-badge)
+![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker)
+![Google Gemini](https://img.shields.io/badge/Google-Gemini-4285F4?style=for-the-badge&logo=google)
+
+</div>
 
 ---
 
+## 📸 Preview
+
+> _GIF do projeto em funcionamento será adicionado aqui._
+
+---
+
+## 📌 Overview
+
+Nexa is a virtual assistant for WhatsApp that combines predefined conversation flows with generative AI to provide a more natural customer service experience.
+
+The assistant is capable of:
+
+- answering questions about the company;
+- presenting services and pricing;
+- opening support tickets;
+- scheduling appointments;
+- transferring conversations to a human agent;
+- maintaining conversation state and history.
+
+The project was designed following a service-oriented architecture using the Repository Pattern and Command Pattern.
 ## 🚀 Features
 
 - 📱 WhatsApp integration with `whatsapp-web.js`
