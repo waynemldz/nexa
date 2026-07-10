@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from app.services.conversation_state_service import conversation_state_service
 
 from app.repositories.ticket_repository import (
     get_open_ticket,
@@ -37,4 +38,13 @@ def finish_ticket(user_id: str):
 
     return {
         "message": "Ticket encerrado."
+    }
+
+@router.post("/reset/{user_id}")
+def reset_conversation(user_id: str):
+
+    conversation_state_service.clear(user_id)
+
+    return {
+        "message": "Conversa reiniciada."
     }

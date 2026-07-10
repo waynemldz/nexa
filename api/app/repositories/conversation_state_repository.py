@@ -1,5 +1,6 @@
 from database import SessionLocal
 from app.models.conversation_state import ConversationState
+from datetime import datetime, timedelta
 
 db = SessionLocal()
 
@@ -42,3 +43,14 @@ def clear_state(user_id):
 
         conversation.state = None
         db.commit()
+
+def is_inactive(user_id: str, hours: int = 2) -> bool:
+
+    conversation = db.get(ConversationState, user_id)
+
+    if conversation is None or conversation.updated_at is None:
+        return False
+
+    inactivity_limit = datetime.utcnow() - timedelta(hours=hours)
+
+    return conversation.updated_at < inactivity_limit

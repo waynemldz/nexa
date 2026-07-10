@@ -1,5 +1,6 @@
 from app.commands.base_command import BaseCommand
 from app.services.conversation_state_service import conversation_state_service
+from app.services.ticket_service import ticket_service
 
 
 class SupportCommand(BaseCommand):
@@ -9,9 +10,13 @@ class SupportCommand(BaseCommand):
 
     def handle(self, user_id: str, message: str) -> str:
 
-        conversation_state_service.clear(user_id)
+        ticket = ticket_service.create(user_id)
+
+        conversation_state_service.set(user_id, "human")
 
         return (
-            "Sua solicitação foi registrada com sucesso!\n\n"
-            "Nossa equipe entrará em contato em breve."
+            "Sua solicitação foi registrada com sucesso! ✅\n\n"
+            f"Protocolo: #{ticket.id}\n"
+            "Nossa equipe responderá assim que possível.\n\n"
+            "Você pode continuar enviando informações nesta conversa."
         )

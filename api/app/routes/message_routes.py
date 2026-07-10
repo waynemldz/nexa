@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 
 from app.services.message_service import process_message
+from app.services.conversation_state_service import conversation_state_service
 
 router = APIRouter()
 
@@ -24,6 +25,17 @@ def receive_message(data: Message):
         data.message
     )
 
+    current_state = conversation_state_service.get(data.user_id)
+
     return {
-        "response": response
+        "response": response,
+        "state": current_state
+    }
+
+@router.post("/conversation/{user_id}/reset")
+def reset_conversation(user_id: str):
+    conversation_state_service.clear(user_id)
+
+    return {
+        "message": "Conversation reset successfully"
     }
