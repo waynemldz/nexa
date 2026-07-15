@@ -42,6 +42,7 @@ class ScheduleCommand(BaseCommand):
             r"^marcar para\s+",
             r"^marcar\s+",
             r"^pode ser\s+",
+            r"^teria na\s+",
         ]
 
         for prefix in prefixes:
